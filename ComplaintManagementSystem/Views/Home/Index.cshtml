@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Welcome to Sara.Co <br> Complaint Management System</h1>
+    <p class="lead text-center">
+        Our team developed the Complaints Management System to make it easier for users to submit and track their complaints online.<br>
+        This system helps improve communication, ensures faster responses, and provides a more transparent <br>
+        and efficient way for organizations to resolve issues—giving users a better overall experience.
+    </p>
+       
+    <div class="text-center mt-4">
+        <a asp-controller="Complaints" asp-action="Index" class="btn btn-primary">View Complaints</a>
+        <a asp-controller="Complaints" asp-action="Create" class="btn btn-success">Submit Complaint</a>
+    </div>
+</div>

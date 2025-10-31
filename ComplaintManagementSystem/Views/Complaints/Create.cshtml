@@ -1,0 +1,35 @@
+﻿@model ComplaintManagementSystem.Models.Complaints
+
+@{
+    ViewData["Title"] = "Submit Complaint";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Submit a New Complaint</h2>
+
+    <!-- Show validation summary -->
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <form asp-action="Create" method="post">
+        <div class="form-group mb-3">
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-control" placeholder="Enter complaint title" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control" rows="4" placeholder="Describe the issue"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <input type="hidden" asp-for="UserID" value="3" />
+
+        <button type="submit" class="btn btn-success">Submit Complaint</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

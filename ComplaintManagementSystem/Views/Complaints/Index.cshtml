@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ComplaintManagementSystem.Models.Complaints>
+@{
+    ViewData["Title"] = "All Complaints";
+}
+
+<h2 class="text-center mb-4">📋 Complaint Dashboard</h2>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Date</th>
+            @* Only show Actions column for Admin/Staff *@
+            @if (ViewBag.UserRole == "Admin" || ViewBag.UserRole == "Staff")
+            {
+                <th>Actions</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>
+                    @* Status badge colors *@
+                    @if (item.Status == "Pending")
+                    {
+                        <span class="badge bg-warning text-dark">@item.Status</span>
+                    }
+                    else if (item.Status == "Resolved")
+                    {
+                        <span class="badge bg-success">@item.Status</span>
+                    }
+                    else if (item.Status == "In Progress")
+                    {
+                        <span class="badge bg-info text-dark">@item.Status</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">@item.Status</span>
+                    }
+                </td>
+                <td>@item.DateCreated.ToShortDateString()</td>
+
+                @* Only show buttons for Admin or Staff *@
+                @if (ViewBag.UserRole == "Admin" || ViewBag.UserRole == "Staff")
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ComplaintID" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.ComplaintID" class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this complaint?');">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-success mt-3">+ Submit New Complaint</a>
